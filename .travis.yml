@@ -17,6 +17,7 @@ matrix:
       dist: xenial
       sudo: true
     - python: 3.8
+      arch: arm64
       env: TOXENV=py38 CC=gcc
       dist: xenial
       sudo: true
