@@ -10,5 +10,5 @@ $1 -m pip install virtualenv
 $1 -m virtualenv ~/.venv
 source ~/.venv/bin/activate
 $1 -m pip install tox
-$1 -m pip install wheelhouse/bcrypt-3.1.8.dev1-cp$1-cp$1m-manylinux2014_aarch64.whl
+$1 -m pip install wheelhouse/bcrypt-3.1.8.dev1-cp36-cp36m-manylinux2014_aarch64.whl
 .travis/run.sh
