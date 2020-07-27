@@ -4,3 +4,6 @@ $1 -m pip install --upgrade pip
 $1 -m pip install --upgrade setuptools wheel
 $1 setup.py bdist_wheel --plat-name=manylinux2014_aarch64 -d wheelhouse
 ls wheelhouse
+.travis/install.sh
+$1 -m pip install wheelhouse/PyNaCl-1.5.0.dev1-cp$1-cp$1m-manylinux2014_aarch64.whl
+.travis/run.sh
