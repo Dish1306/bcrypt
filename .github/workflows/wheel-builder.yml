@@ -1,5 +1,9 @@
 name: Wheel Builder
 on:
+  push:
+    branches:
+      - master
+      - "rel_*"
   repository_dispatch:
     types: [wheel-builder]
 
