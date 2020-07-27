@@ -115,4 +115,24 @@ jobs:
       - uses: actions/upload-artifact@v1
         with:
           name: "bcrypt-${{ github.event.client_payload.BUILD_VERSION }}-${{ matrix.WINDOWS.WINDOWS }}-${{ matrix.PYTHON.VERSION }}"
-          path: bcrypt-wheelhouse\
+          path: bcrypt-wheelhouse
+  
+  make-wheel-linux-arm64:
+     name: Arm64 wheel-python${{ matrix.python-version }}
+     runs-on: ubuntu-latest
+     strategy:
+       matrix:
+         python-version:
+           - "3.6"
+           - "3.7"
+           - "3.8"
+       fail-fast: false
+     steps:
+     - uses: actions/checkout@v2
+     - run: |
+         docker run --rm --privileged multiarch/qemu-user-static:register --reset
+     - uses: docker://multiarch/ubuntu-core:arm64-bionic
+       with:
+         args: 'bash .github/arm64_create_wheels.sh python${{ matrix.python-version }}'
+     - run: |
+         ls /home/runner/work/pynacl/pynacl
