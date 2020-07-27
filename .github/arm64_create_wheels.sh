@@ -6,7 +6,7 @@ $1 setup.py bdist_wheel --plat-name=manylinux2014_aarch64 -d wheelhouse
 ls wheelhouse
 set -e
 set -x
-$1 -m install virtualenv
+$1 -m pip virtualenv
 $1 -m virtualenv ~/.venv
 source ~/.venv/bin/activate
 $1 -m pip install tox
