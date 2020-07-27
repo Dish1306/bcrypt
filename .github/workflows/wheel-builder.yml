@@ -135,4 +135,4 @@ jobs:
        with:
          args: 'bash .github/arm64_create_wheels.sh python${{ matrix.python-version }}'
      - run: |
-         ls /home/runner/work/pynacl/pynacl
+         ls /home/runner/work/bcrypt/bcrypt
