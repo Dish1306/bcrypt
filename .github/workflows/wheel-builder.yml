@@ -135,8 +135,9 @@ jobs:
      - run: |
          docker run --rm --privileged multiarch/qemu-user-static:register --reset
      - uses: docker://quay.io/pypa/manylinux2014_aarch64
-       with:
-         args: 'bash ls -a'
-         #args: 'bash .github/arm64_create_wheels.sh python${{ matrix.python-version }}'
+     - run: |
+         bash ls -la
+     - run: |
+         bash .github/arm64_create_wheels.sh python${{ matrix.python-version }}
      - run: |
          ls /home/runner/work/bcrypt/bcrypt
