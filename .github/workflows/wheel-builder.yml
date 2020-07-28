@@ -134,8 +134,9 @@ jobs:
      - uses: actions/checkout@v2
      - run: |
          docker run --rm --privileged multiarch/qemu-user-static:register --reset
-     - uses: docker://dockcross/manylinux2014-aarch64
+     - uses: docker://quay.io/pypa/manylinux2014_aarch64
        with:
-         args: 'bash .github/arm64_create_wheels.sh python${{ matrix.python-version }}'
+         args: ls -a
+         #args: 'bash .github/arm64_create_wheels.sh python${{ matrix.python-version }}'
      - run: |
          ls /home/runner/work/bcrypt/bcrypt
