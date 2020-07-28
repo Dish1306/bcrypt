@@ -124,7 +124,7 @@ jobs:
   make-wheel-linux-arm64:
      name: Arm64 wheel-python${{ matrix.python-version }}
      runs-on: ubuntu-latest
-     container: quay.io/pypa/manylinux2014_aarch64
+     container: dockcross/manylinux2014-aarch64:latest
      strategy:
        matrix:
          python-version:
