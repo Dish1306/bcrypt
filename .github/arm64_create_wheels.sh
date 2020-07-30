@@ -1,8 +1,11 @@
 yum update -y
-yum install -y coreutils curl python3-pip libffi-devel $1 lib$1-devel
-$1 -m pip install --upgrade pip
-$1 -m pip install --upgrade setuptools wheel
-$1 setup.py bdist_wheel --plat-name=manylinux2014_aarch64 -d wheelhouse
+yum install -y coreutils curl
+alias python = /opt/_internal/cpython-$1*/bin/python
+python -m pip install -U pip setuptools wheel
+python setup.py bdist_wheel -d wheelhouse
+#$1 -m pip install --upgrade pip
+#$1 -m pip install --upgrade setuptools wheel
+#$1 setup.py bdist_wheel --plat-name=manylinux2014_aarch64 -d wheelhouse
 ls wheelhouse
 #set -e
 #set -x
