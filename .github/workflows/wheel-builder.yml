@@ -10,13 +10,12 @@ on:
 jobs:
   manylinux:
     runs-on: ubuntu-latest
-    container: quay.io/pypa/manylinux2014_aarch64
+    container: pyca/cryptography-manylinux1:x86_64
     strategy:
       matrix:
         PYTHON: ["cp37-cp37m", "cp38-cp38m"]
     name: "Python ${{ matrix.PYTHON }} for manylinux2014"
     steps:
-      - run: docker run --rm --privileged multiarch/qemu-user-static:register --reset
       - run: /opt/python/${{ matrix.PYTHON }}/bin/python -m virtualenv .venv
       - name: Downgrade pip, can't remember why
         run: .venv/bin/pip install -U pip==10.0.1
