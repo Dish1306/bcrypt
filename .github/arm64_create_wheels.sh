@@ -1,7 +1,7 @@
 yum update -y
 /opt/_internal/cpython-$1*/bin/python -m pip install -U pip setuptools wheel
 #/opt/_internal/cpython-$1*/bin/python setup.py bdist_wheel --py-limited-api=cp36 -d wheelhouse
-/opt/_internal/cpython-$1*/bin/python -m pip wheel bcrypt --no-binary bcrypt --no-deps --wheel-dir=tmpwheelhouse
+/opt/_internal/cpython-$1*/bin/python -m pip wheel bcrypt --no-binary bcrypt --no-deps --wheel-dir=tmpwheelhouse --py-limited-api=cp36
 auditwheel repair tmpwheelhouse/bcrypt*.whl -w wheelhouse/
 /opt/_internal/cpython-$1*/bin/python -m pip install bcrypt --no-index -f wheelhouse/
 /opt/_internal/cpython-$1*/bin/python -c "import bcrypt; password = b'super secret password';hashed = bcrypt.hashpw(password, bcrypt.gensalt());bcrypt.checkpw(password, hashed)"
