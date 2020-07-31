@@ -128,8 +128,6 @@ jobs:
        matrix:
          python-version:
            - "3.6"
-           - "3.7"
-           - "3.8"
        fail-fast: false
      steps:
      - uses: actions/checkout@v2  
@@ -138,5 +136,3 @@ jobs:
      - uses: docker://quay.io/pypa/manylinux2014_aarch64
        with:
         args: 'bash .github/arm64_create_wheels.sh ${{ matrix.python-version }}'
-     - run: |
-         ls /home/runner/work/bcrypt/bcrypt
