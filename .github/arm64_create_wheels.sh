@@ -1,6 +1,7 @@
 yum update -y
 /opt/python/$1/bin/pip install virtualenv
 /opt/python/$1/bin/python -m virtualenv .venv
+.venv/bin/pip install -U pip==10.0.1
 .venv/bin/pip install setuptools wheel cffi six
 PY_LIMITED_API="--py-limited-api=cp3${BASH_REMATCH[1]}"
 #/opt/_internal/cpython-$1*/bin/python setup.py bdist_wheel --py-limited-api=cp36 -d wheelhouse
