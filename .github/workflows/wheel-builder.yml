@@ -136,7 +136,7 @@ jobs:
        with:
         args: 'bash .github/arm64_create_wheels.sh ${{ matrix.PYTHON }}'
      - run: mkdir bcrypt-wheelhouse
-     - run: 'bash mv wheelhouse/bcrypt*.whl bcrypt-wheelhouse/'
+     - run: sudo mv wheelhouse/bcrypt*.whl bcrypt-wheelhouse/
      - uses: actions/upload-artifact@v1
        with:
           name: "bcrypt-${{ github.event.client_payload.BUILD_VERSION }}-manylinux2014-${{ matrix.PYTHON }}"
