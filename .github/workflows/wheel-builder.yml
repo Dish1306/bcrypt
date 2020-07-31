@@ -121,8 +121,8 @@ jobs:
           name: "bcrypt-${{ github.event.client_payload.BUILD_VERSION }}-${{ matrix.WINDOWS.WINDOWS }}-${{ matrix.PYTHON.VERSION }}"
           path: bcrypt-wheelhouse
   
-  make-wheel-linux-arm64:
-     name: Arm64 wheel-python${{ matrix.python-version }}
+  linux-arm64:
+     name: Arm64 wheel-python${{ matrix.PYTHON }}
      runs-on: ubuntu-latest
      strategy:
        matrix:
