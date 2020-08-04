@@ -28,7 +28,7 @@ jobs:
           if [[ "${{ matrix.PYTHON }}" =~ $REGEX ]]; then
               PY_LIMITED_API="--no-use-pep517 --build-option --py-limited-api=cp3${BASH_REMATCH[1]}"
           fi
-          .venv/bin/pip wheel bcrypt --no-binary bcrypt --no-deps --wheel-dir=tmpwheelhouse $PY_LIMITED_API
+          .venv/bin/pip wheel . --no-binary bcrypt --no-deps --wheel-dir=tmpwheelhouse $PY_LIMITED_API
       - run: auditwheel repair tmpwheelhouse/bcrypt*.whl -w wheelhouse/
       - run: .venv/bin/pip install bcrypt --no-index -f wheelhouse/
       - run: |
@@ -128,7 +128,7 @@ jobs:
      runs-on: ubuntu-latest
      strategy:
        matrix:
-         PYTHON: ["cp36-cp36m"]
+         PYTHON: ["cp35-cp35m"]
        fail-fast: false
      steps:
      - uses: actions/checkout@v2  
