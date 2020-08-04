@@ -140,7 +140,8 @@ jobs:
               bash -c "set -xe;
               /opt/python/${{ matrix.PYTHON }}/bin/pip install virtualenv;
               /opt/python/${{ matrix.PYTHON }}/bin/python -m virtualenv .venv;
-              .venv/bin/pip install setuptools wheel cffi>=1.1 six;
+              .venv/bin/pip install setuptools wheel six;
+              .venv/bin/pip install -U cffi==1.1;
               .venv/bin/pip install -U pip==10.0.1; # downgrade pip for reasons we can't remember but are definitely needed
               REGEX='cp3([0-9])*';
               if [[ ${{ matrix.PYTHON }} =~ $REGEX ]]; then
