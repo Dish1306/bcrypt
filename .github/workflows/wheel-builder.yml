@@ -17,18 +17,16 @@ jobs:
     name: "Python ${{ matrix.PYTHON }} for manylinux2014"
     steps:
       - run: /opt/python/${{ matrix.PYTHON }}/bin/python -m virtualenv .venv
-      #- name: Downgrade pip, can't remember why
-        #run: .venv/bin/pip install -U pip==10.0.1
+      - name: Downgrade pip, can't remember why
+        run: pwd #.venv/bin/pip install -U pip==10.0.1
       - name: Install python dependencies
         run: .venv/bin/pip install cffi six
-      - name: list
-        run: ls
       - run: |
           REGEX="cp3([0-9])*"
           if [[ "${{ matrix.PYTHON }}" =~ $REGEX ]]; then
               PY_LIMITED_API="--no-use-pep517 --build-option --py-limited-api=cp3${BASH_REMATCH[1]}"
           fi
-          .venv/bin/pip wheel . --no-binary bcrypt --no-deps --wheel-dir=tmpwheelhouse $PY_LIMITED_API
+          .venv/bin/pip wheel bcrypt --no-binary bcrypt --no-deps --wheel-dir=tmpwheelhouse $PY_LIMITED_API
       - run: auditwheel repair tmpwheelhouse/bcrypt*.whl -w wheelhouse/
       - run: .venv/bin/pip install bcrypt --no-index -f wheelhouse/
       - run: |
