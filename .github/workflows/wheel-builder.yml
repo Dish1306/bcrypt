@@ -134,7 +134,21 @@ jobs:
          docker run --rm --privileged hypriot/qemu-register
      - uses: docker://quay.io/pypa/manylinux2014_aarch64
        with:
-        args: 'bash .github/arm64_create_wheels.sh ${{ matrix.PYTHON }}'
+        args: |
+              bash -c "set -xe;
+              /opt/python/${{ matrix.PYTHON }}/bin/pip install virtualenv;
+              /opt/python/${{ matrix.PYTHON }}/bin/python -m virtualenv .venv;
+              .venv/bin/pip install setuptools wheel cffi six;
+              .venv/bin/pip install -U pip==10.0.1; # downgrade pip for reasons we can't remember but are definitely needed
+              REGEX='cp3([0-9])*';
+              if [[ ${{ matrix.PYTHON }} =~ $REGEX ]]; then
+                  PY_LIMITED_API=\"--build-option --py-limited-api=cp3${BASH_REMATCH[1]}\";
+              fi;
+              .venv/bin/pip wheel bcrypt --no-binary bcrypt --no-deps --wheel-dir=tmpwheelhouse $PY_LIMITED_API;
+              auditwheel repair tmpwheelhouse/bcrypt*.whl -w wheelhouse/;
+              .venv/bin/pip install -U pip; # upgrade so it knows how to install a manylinux2014 wheel, sigh
+              .venv/bin/pip install bcrypt --no-index -f wheelhouse/;
+              .venv/bin/python -c \"import bcrypt; password = b'super secret password';hashed = bcrypt.hashpw(password, bcrypt.gensalt());bcrypt.checkpw(password, hashed)\";"
      - run: mkdir bcrypt-wheelhouse
      - run: sudo mv wheelhouse/bcrypt*.whl bcrypt-wheelhouse/
      - uses: actions/upload-artifact@v1
