@@ -136,7 +136,6 @@ jobs:
        with:
         args: |
               bash -c "set -xe;
-              yum update -y
               /opt/python/${{ matrix.PYTHON }}/bin/pip install virtualenv;
               /opt/python/${{ matrix.PYTHON }}/bin/python -m virtualenv .venv;
               .venv/bin/pip install setuptools wheel cffi six;
