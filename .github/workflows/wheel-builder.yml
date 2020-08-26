@@ -145,6 +145,9 @@ jobs:
                   PY_LIMITED_API=\"--build-option --py-limited-api=cp3${BASH_REMATCH[1]}\";
               fi;
               .venv/bin/pip wheel bcrypt --no-binary bcrypt --no-deps --wheel-dir=tmpwheelhouse $PY_LIMITED_API;
+              cd tmpwheelhouse;
+              unzip bcrypt-3.1.7-cp35-abi3-manylinux2014_aarch64.whl;
+              ls -la;
               auditwheel repair tmpwheelhouse/bcrypt*.whl -w wheelhouse/;
               .venv/bin/pip install -U pip; # upgrade so it knows how to install a manylinux2014 wheel, sigh
               .venv/bin/pip install bcrypt --no-index -f wheelhouse/;
